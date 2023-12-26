@@ -1,0 +1,23 @@
+var1 : 50
+var2 : 2.2
+# Comment
+
+category1 :
+    var3 : "value2"
+    var4 : -8.65
+    # comment again
+    var5 : "oh no" # comment once more
+
+var6 : 95 ** 0.5
+
+category2 :
+    var7 : [1.0, 6.1, 4, 3]
+    var8 : "oskour"
+    var9 : -9
+    sub_category1 :
+        array1 : [1e-9, 5 ** 2, 8*3+2]
+        text1 : "Test text again"
+        scientific_notation_float : -3e-5
+
+var10 : 5 * 7 * 0.56
+var11 : "'test' * 5" # Needs to be inside " characters to have proper evaluation
