@@ -16,10 +16,9 @@ The main advantage of doing this compared to using a python dictionnary with eas
 - PyYAML
 
 ## Installation
+Install PyYAML :
 ```bash
-git clone https://github.com/Jehxon/config_maker.git
-cd ConfigurationMaker
-pip install .
+pip install pyyaml
 ```
 
 ## Usage
