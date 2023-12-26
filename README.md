@@ -8,7 +8,7 @@ It also evaluates any expression it can find. For example
 var : [1e-5, 5*9.4, 'test'*3]
 ...
 ```
-will work fine and produce a valid python list, behaving as expected. See [the example](https://github.com/Jehxon/ConfigurationMaker.git/tree/main/Example) for more detail.
+will work fine and produce a valid python list, behaving as expected. See [the example](https://github.com/Jehxon/config_maker/tree/main/config_maker/Example) for more detail.
 The main advantage of doing this compared to using a python dictionnary with easy-dict is to have autocompletion throughout your code for all your parameters.
 
 ## Prerequisites
@@ -17,13 +17,13 @@ The main advantage of doing this compared to using a python dictionnary with eas
 
 ## Installation
 ```bash
-git clone https://github.com/Jehxon/ConfigurationMaker.git
+git clone https://github.com/Jehxon/config_maker.git
 cd ConfigurationMaker
 pip install .
 ```
 
 ## Usage
-1. Create a YAML configuration file. See [the example](https://github.com/Jehxon/ConfigurationMaker.git/tree/main/Example).
+1. Create a YAML configuration file. See [the example](https://github.com/Jehxon/config_maker/tree/main/config_maker/Example).
 2. Generate the configuration class :
     ```bash
     python config_maker.py config_file.yml -o output_file.py
