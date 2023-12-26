@@ -20,12 +20,17 @@ Install PyYAML :
 ```bash
 pip install pyyaml
 ```
+Clone the project and you can run the script :
+```bash
+git clone https://github.com/Jehxon/config_maker.git
+python config_maker/config_class_generator.py *config_file.yaml*
+```
 
 ## Usage
 1. Create a YAML configuration file. See [the example](https://github.com/Jehxon/config_maker/tree/main/config_maker/Example).
 2. Generate the configuration class :
     ```bash
-    python config_maker.py config_file.yml -o output_file.py
+    python config_class_generator.py config_file.yaml -o output_file.py
     ```
     ### Arguments
     - config_file: Path to the YAML configuration file.
