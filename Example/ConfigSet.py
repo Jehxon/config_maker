@@ -5,10 +5,12 @@ import yaml
 import os
 from dataclasses import dataclass
 
-def EvalExpression(e: str):
-    res = e
+def EvalExpression(e):
+    if(type(e) == list):
+        return [EvalExpression(elt) for elt in e]
+    res = str(e)
     try:
-        res = eval(e)
+        res = eval(res)
     except:
         pass
     return res
@@ -31,12 +33,14 @@ class _Sub_category1:
     array1: list
     text1: str
     scientific_notation_float: float
+    array2: list
     @classmethod
     def _fromDict(cls, param_dict: dict):
         return cls(
             EvalExpression(param_dict['array1']),
             EvalExpression(param_dict['text1']),
-            EvalExpression(param_dict['scientific_notation_float'])
+            EvalExpression(param_dict['scientific_notation_float']),
+            EvalExpression(param_dict['array2'])
             )
 
 @dataclass
@@ -59,7 +63,7 @@ class _ConfigurationSet:
     category1: _Category1
     category2: _Category2
     var1: int
-    var2: int
+    var2: float
     var6: float
     var10: float
     var11: str
@@ -82,3 +86,6 @@ class _ConfigurationSet:
             return cls._fromDict(param_dict)
 
 config = _ConfigurationSet.FromFile(os.path.join(os.path.dirname(__file__), "config_example.yaml"))
+print(config.category2.sub_category1.array1)
+print(config.category2.sub_category1.array2)
+print(config.var6)

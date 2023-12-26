@@ -16,10 +16,12 @@ import yaml
 import os
 from dataclasses import dataclass
 
-def EvalExpression(e: str):
-    res = e
+def EvalExpression(e):
+    if(type(e) == list):
+        return [EvalExpression(elt) for elt in e]
+    res = str(e)
     try:
-        res = eval(e)
+        res = eval(res)
     except:
         pass
     return res
@@ -39,7 +41,7 @@ def ParameterClassFromDict(name: str, param_dict: dict):
     subclasses = [ParameterClassFromDict(v, s[v]) for s in subsections for v in s]
 
     subclasses_instances_variables = [f"{v.lower()}: {ClassName(v)}" for s in subsections for v in s]
-    regular_variables = [Variable(v, type(EvalExpression(str(variables[v])))) for v in variables]
+    regular_variables = [Variable(v, type(EvalExpression(variables[v]))) for v in variables]
     
     load_subclasses = [f"{ClassName(v)}._fromDict(param_dict['{v}'])" for s in subsections for v in s]
     load_variables = [f"EvalExpression(param_dict['{v}'])" for v in variables]
@@ -60,10 +62,12 @@ def ClassName(name: str) -> str:
 def Variable(v: str, t: type) -> str:
     return v.lower() + ': ' + str(t).split("'")[1]
 
-def EvalExpression(e: str):
-    res = e
+def EvalExpression(e):
+    if(type(e) == list):
+        return [EvalExpression(elt) for elt in e]
+    res = str(e)
     try:
-        res = eval(e)
+        res = eval(res)
     except:
         pass
     return res

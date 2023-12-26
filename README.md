@@ -5,11 +5,15 @@ The Configuration Maker is a Python utility script designed to automate the gene
 It also evaluates any expression it can find. For example
 ```yaml
 ...
-var : [1e-5, 5*9.4, 'test'*3]
+var : [1e-5, 5*9.4, "'test'*3"]
 ...
 ```
-will work fine and produce a valid python list, behaving as expected. See [the example](https://github.com/Jehxon/config_maker/tree/main/config_maker/Example) for more detail.
-The main advantage of doing this compared to using a python dictionnary with easy-dict is to have autocompletion throughout your code for all your parameters.
+will work fine and produce the following python list :
+```python
+[1e-05, 47.0, 'testtesttest']
+```
+See [the example](https://github.com/Jehxon/config_maker/tree/main/config_maker/Example) for more detail.
+The main advantage of using this over a python dictionnary (with easy-dict) is to have autocompletion throughout your code for all your parameters.
 
 ## Prerequisites
 - Python 3.x
