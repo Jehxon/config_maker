@@ -35,15 +35,15 @@ def EvalExpression(e):
 config = _ConfigurationSet.FromFile(os.path.join(os.path.dirname(__file__), "{os.path.relpath(config_file, os.path.dirname(output_file))}"))
 """
 
-def ParameterClassFromDict(name: str, param_dict: dict):
-    class_name = ClassName(name)
+def ParameterClassFromDict(name: str, param_dict: dict, parent_class: str = ""):
+    class_name = ClassName(name, parent_class)
     variables, subsections = AnalyzeDict(param_dict)
-    subclasses = [ParameterClassFromDict(v, s[v]) for s in subsections for v in s]
+    subclasses = [ParameterClassFromDict(v, s[v], class_name) for s in subsections for v in s]
 
-    subclasses_instances_variables = [f"{v.lower()}: {ClassName(v)}" for s in subsections for v in s]
+    subclasses_instances_variables = [f"{v.lower()}: {ClassName(v, class_name)}" for s in subsections for v in s]
     regular_variables = [Variable(v, type(EvalExpression(variables[v]))) for v in variables]
     
-    load_subclasses = [f"{ClassName(v)}._fromDict(param_dict['{v}'])" for s in subsections for v in s]
+    load_subclasses = [f"{ClassName(v, class_name)}._fromDict(param_dict['{v}'])" for s in subsections for v in s]
     load_variables = [f"EvalExpression(param_dict['{v}'])" for v in variables]
     return f"""{"".join(subclasses)}
 @dataclass
@@ -56,8 +56,8 @@ class {class_name}:
             )
 """
 
-def ClassName(name: str) -> str:
-    return '_' + name[0].upper() + name[1:]
+def ClassName(name: str, parent: str) -> str:
+    return parent + '_' + name[0].upper() + name[1:]
 
 def Variable(v: str, t: type) -> str:
     return v.lower() + ': ' + str(t).split("'")[1]

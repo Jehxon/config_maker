@@ -16,7 +16,7 @@ def EvalExpression(e):
     return res
 
 @dataclass
-class _Category1:
+class _ConfigurationSet_Category1:
     var3: str
     var4: float
     var5: str
@@ -29,7 +29,7 @@ class _Category1:
             )
 
 @dataclass
-class _Sub_category1:
+class _ConfigurationSet_Category2_Sub_category1:
     array1: list
     text1: str
     scientific_notation_float: float
@@ -44,15 +44,15 @@ class _Sub_category1:
             )
 
 @dataclass
-class _Category2:
-    sub_category1: _Sub_category1
+class _ConfigurationSet_Category2:
+    sub_category1: _ConfigurationSet_Category2_Sub_category1
     var7: list
     var8: str
     var9: int
     @classmethod
     def _fromDict(cls, param_dict: dict):
         return cls(
-            _Sub_category1._fromDict(param_dict['sub_category1']),
+            _ConfigurationSet_Category2_Sub_category1._fromDict(param_dict['sub_category1']),
             EvalExpression(param_dict['var7']),
             EvalExpression(param_dict['var8']),
             EvalExpression(param_dict['var9'])
@@ -60,8 +60,8 @@ class _Category2:
 
 @dataclass
 class _ConfigurationSet:
-    category1: _Category1
-    category2: _Category2
+    category1: _ConfigurationSet_Category1
+    category2: _ConfigurationSet_Category2
     var1: int
     var2: float
     var6: float
@@ -70,8 +70,8 @@ class _ConfigurationSet:
     @classmethod
     def _fromDict(cls, param_dict: dict):
         return cls(
-            _Category1._fromDict(param_dict['category1']),
-            _Category2._fromDict(param_dict['category2']),
+            _ConfigurationSet_Category1._fromDict(param_dict['category1']),
+            _ConfigurationSet_Category2._fromDict(param_dict['category2']),
             EvalExpression(param_dict['var1']),
             EvalExpression(param_dict['var2']),
             EvalExpression(param_dict['var6']),
